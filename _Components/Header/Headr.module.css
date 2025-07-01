@@ -1,0 +1,35 @@
+.header {
+  font-family: 'Roboto';
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #111827; /* dark navy */
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #3b82f6; /* blue accent */
+  margin-left: 0.5rem;
+}
+.nav-links a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #3b82f6;
+}
+
+ .nav-links a.slected {
+  color: #3b82f6;
+}
