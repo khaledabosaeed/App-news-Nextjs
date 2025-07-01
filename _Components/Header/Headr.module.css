@@ -1,4 +1,5 @@
 .header {
+  font-family: 'Roboto';
   display: flex;
   align-items: center;
   padding: 1rem 2rem;
@@ -10,7 +11,6 @@
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: "Poppins", sans-serif;
 }
 
 .logo span {
@@ -22,10 +22,14 @@
   text-decoration: none;
   color: #ffffff;
   font-weight: 500;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
+  color: #3b82f6;
+}
+
+ .nav-links a.slected {
   color: #3b82f6;
 }
