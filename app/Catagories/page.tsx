@@ -1,14 +1,11 @@
-import Link from "next/link"
+import { Catagorydata } from "@/data/catagory"
+import styles from "./Catagory.module.css"
+import Catagory from "@/_Components/Catagory/Catagory"
 
 function Page() {
-
   return (
-    <div>
-      <Link href="/news-list/business">US business</Link>
-      <br />
-      <Link href="/news-list/health">Uk health</Link>
-      <br />
-      <Link href="/news-list/technology">technology</Link>
+    <div className={styles.Catagories}>
+          <Catagory data={Catagorydata} />
     </div >
   )
 }

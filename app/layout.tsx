@@ -29,9 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"className={`${Mulishfont.className} ${Robotofont.className} `}>
+    <html
+      lang="en"
+      className={`${Mulishfont.className} ${Robotofont.className} `}>
       <body>
-        <Headr/>
+        <Headr />
         {children}
       </body>
     </html>
