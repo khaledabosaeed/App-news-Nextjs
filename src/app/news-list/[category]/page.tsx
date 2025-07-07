@@ -1,8 +1,8 @@
-
-import Image from 'next/image'
 import { fetchData } from '@/src/app/services/news.service';
 import styles from './page.module.css'
 import Sidebar from './Sidbar';
+import MainContiner from './MainContiner';
+
 interface Iporops {
     params: Promise<{ category: string }>
 }
@@ -14,33 +14,8 @@ const Page = async ({ params }: Iporops) => {
     return (
         <div className={styles.mainContinar}>
             <Sidebar />
-            <div className={styles.Continer}>
-                <h1 className={styles.title}>{category.toUpperCase() + " "}NEWS</h1>
-                <div className={styles.continer}>
-                    {latestNews.map((item, index) => {
-                        return (
-                            <div key={index} className={styles.item}>
-                                <h1>{item.title}</h1>{
-                                    item.img !== null &&
-                                    <div className={styles.imgContiner}>
-                                        <Image
-                                            className={styles.img}
-                                            src={item.img}
-                                            alt='new-image'
-                                            style={{ objectFit: "cover" }}
-                                            fill
-                                        />
-                                    </div>
-                                }
-                                <p>{item.Desc}</p>
-                            </div>
-                        )
-                    })
-                    }
-                </div>
-            </div >
+            <MainContiner latestNews={latestNews} catagory={category} />
         </div>
-
     )
 }
 

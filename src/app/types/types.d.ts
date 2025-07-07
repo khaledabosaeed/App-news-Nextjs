@@ -1,3 +1,4 @@
+// import { catagory } from './types.d';
 declare namespace News {
     export interface INews {
         description: string
@@ -15,6 +16,7 @@ declare namespace News {
         img: string | null;
         Desc: string;
         id: string;
+        catagory:string;
     }
     export interface catagory {
         title: string;

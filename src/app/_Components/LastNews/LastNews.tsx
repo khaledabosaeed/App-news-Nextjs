@@ -4,6 +4,7 @@ import styles from './LastNews.module.css'
 import Item from './item/item';
 function LastNews() {
     const [highlited, setHighlited] = useState(0)
+
     useEffect(() => {
         const sliderInt = setInterval(() => {
             setHighlited(old => (old + 1) % 3)
@@ -12,6 +13,7 @@ function LastNews() {
             clearInterval(sliderInt)
         }
     }, [])
+
     const newsItems = [
         {
             title: "Global Economy Faces Slowdown",
@@ -29,6 +31,7 @@ function LastNews() {
             href: "/technology/ai-expo"
         },
     ];
+
     return (
         <section className={styles.newsSection}>
             <h2 className={styles.newsHeading}>🗞️ Latest News</h2>
@@ -40,7 +43,6 @@ function LastNews() {
                     href={item.href}
                     summary={item.summary}
                     isHighlited={index === highlited}
-
                 />))}
             </div>
         </section>
