@@ -1,11 +1,8 @@
 import styles from './page.module.css'
-function Sidebar({ children, }: Readonly<{ children: React.ReactNode; }>) {
+function Sidebar() {
     return (
         <div>
-            <>
             <div className={styles.sidebar}></div>
-            </>
-            {children}
         </div>
     )
 }

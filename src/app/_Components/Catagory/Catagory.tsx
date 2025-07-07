@@ -10,7 +10,7 @@ function Catagory(props: Iprops) {
         <div className={styles.catagory}>
             {props.data.map((item, index) => {
                 return (
-                    <Link href={"/news-list/" + item.title} key={index} >
+                    <Link href={"/news-list/" + item.title} key={index} className={styles.link}>
                         <div className={styles.catagoryItem} >
                             <h1>{item.title}</h1>
                             <div className={styles.imgContiner}>

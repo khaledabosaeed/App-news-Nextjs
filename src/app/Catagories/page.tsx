@@ -1,6 +1,6 @@
-import { Catagorydata } from "@/data/catagory"
+import { Catagorydata } from "@/src/app/data/catagory"
 import styles from "./Catagory.module.css"
-import Catagory from "@/_Components/Catagory/Catagory"
+import Catagory from "@/src/app/_Components/Catagory/Catagory"
 
 function Page() {
   return (
