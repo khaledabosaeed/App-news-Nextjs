@@ -16,12 +16,22 @@ declare namespace News {
         img: string | null;
         Desc: string;
         id: string;
-        catagory:string;
+        catagory: string;
     }
     export interface catagory {
         title: string;
-        img: string ;
+        image: string;
         Desc: string;
     }
-
+    export interface Idata {
+        id: number,
+        title: string,
+        slug: string,
+        image: null,
+        content: string,
+        author: string,
+        author_email: string,
+        date: number,
+        category: string
+    }
 }

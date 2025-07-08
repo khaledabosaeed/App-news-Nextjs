@@ -1,6 +1,6 @@
 export const Catagorydata: News.catagory[] = [
     {
-        title: "Business",
+        title: "sports",
         img: '/CatagoryImage/finance.png',
         Desc: "The latest business news headlines and breaking stories.",
     },

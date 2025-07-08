@@ -8,23 +8,22 @@ interface Iprops {
 }
 function MainContiner(props: Iprops) {
     return (
+
         <div className={styles.Continer}>
             <div className={styles.continer}>
                 {props.latestNews.map((item, index) => {
                     return (
-                        <div key={index} className={styles.item}>
-                            <h1>{item.title}</h1>{
-                                item.img !== null &&
-                                <div className={styles.imgContiner}>
-                                    <Image
-                                        className={styles.img}
-                                        src={item.img}
-                                        alt='new-image'
-                                        style={{ objectFit: "cover" }}
-                                        fill
-                                    />
-                                </div>
-                            }
+                        <div div key={index} className={styles.item} >
+                            <h1>{item.title}</h1>
+                            <div className={styles.imgContiner}>
+                                <Image
+                                    className={styles.image}
+                                    src='/CatagoryImage/finance.png'
+                                    alt='new-image'
+                                    style={{ objectFit: "cover" }}
+                                    fill
+                                />
+                            </div>
                             <p>{item.Desc}</p>
                         </div>
                     )

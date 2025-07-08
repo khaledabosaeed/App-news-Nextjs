@@ -31,7 +31,6 @@
   grid-gap: 10px;
   padding: 10px;
 }
-
 .item {
   display: flex;
   flex-direction: column;
