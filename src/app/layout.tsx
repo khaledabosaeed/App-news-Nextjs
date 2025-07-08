@@ -25,7 +25,7 @@ interface Iprops {
   usNews: React.ReactNode;
   ukNews: React.ReactNode;
 }
-export default function RootLayout({ usNews, ukNews ,children}: Iprops) {
+export default function RootLayout({ usNews, ukNews, children }: Iprops) {
 
   return (
     <html
@@ -34,9 +34,12 @@ export default function RootLayout({ usNews, ukNews ,children}: Iprops) {
       <body>
         <Headr />
         {children}
-       <section> {usNews}</section>
-       <section> {ukNews}</section>
-        
+        {false && (
+          <>
+            <section> {usNews}</section>
+            <section> {ukNews}</section>
+          </>
+        )}
       </body>
     </html>
   );

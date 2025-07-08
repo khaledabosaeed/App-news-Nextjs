@@ -9,7 +9,6 @@ interface Iprops {
 function MainContiner(props: Iprops) {
     return (
         <div className={styles.Continer}>
-            <h1 className={styles.title}>{props.catagory.toUpperCase() + " "}NEWS</h1>
             <div className={styles.continer}>
                 {props.latestNews.map((item, index) => {
                     return (
