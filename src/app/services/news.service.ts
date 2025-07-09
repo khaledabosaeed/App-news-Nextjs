@@ -10,6 +10,29 @@ const getNews = (catagory: string): News.Idata[] => {
 const getArticl = (slug: string): News.Idata => {
     return db.prepare(`SELECT * FROM items WHERE slug = ?`).get(slug) as News.Idata;
 }
+
+const addArticl = (item: News.Idata) => {
+    db.prepare(`INSERT INTO items (
+  title,
+      slug,
+      image,
+      content,
+      author,
+      author_email,
+      date,
+      category
+    )
+VALUES (
+    @title,
+    @slug,
+    @image,
+    @content,
+    @author,
+    @authorEmail,
+    @date,
+    @category)`)
+        .run(item);
+}
 /**
  * @deprecated
  */
@@ -36,5 +59,6 @@ const getArticl = (slug: string): News.Idata => {
 // };
 export {
     getNews,
-    getArticl
+    getArticl,
+    addArticl
 }

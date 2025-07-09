@@ -1,22 +1,7 @@
 import React from 'react'
 import styles from './formPage.module.css'
-
+import { hundleSubmit } from '../services/serverAction'
 function Page() {
-  const hundleSubmit = async (fromData: FormData) => {
-    'use server';
-    const newItem: News.Idata = {
-      title: fromData.get('title') as string,
-      content: fromData.get('content') as string,
-      author: fromData.get('author') as string,
-      authorEmail: fromData.get('author-email') as string,
-      image: fromData.get('imageUrl') as string,
-      slug: fromData.get('slug') as string,
-      date: fromData.get('date') as string,
-      category: fromData.get('category') as string,
-    }
-    console.log(newItem);
-
-  }
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} action={hundleSubmit}>
@@ -32,10 +17,6 @@ function Page() {
         <div className={styles.field}>
           <label htmlFor="imageUrl">Image News URL</label>
           <input type="text" id="imageUrl" name='imageUrl' />
-        </div>
-        <div className={styles.field}>
-          <label htmlFor="slug">slug</label>
-          <input type="text" id="slug" name='slug' />
         </div>
         <div className={styles.field}>
           <label htmlFor="date">Date</label>
