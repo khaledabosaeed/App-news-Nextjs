@@ -6,12 +6,12 @@ import styles from './page.module.css'
 interface Iporops {
     params: Promise<{ category: string }>
 }
-// const country = "us"
+
 let category = ''
+
 const Page = async ({ params }: Iporops) => {
     category = (await params).category;
-    const latestNews: News.item[] = await getNews(category);
-    getNews(category);
+    const latestNews: News.Idata[] =  getNews(category);
     return (
         <div >
             <h1 className={styles.title}>{category.toUpperCase() + ""}NEWS</h1>

@@ -5,7 +5,7 @@ export const Catagorydata: News.catagory[] = [
         Desc: "The latest business news headlines and breaking stories.",
     },
     {
-        title: "Health",
+        title: "global",
         img: '/CatagoryImage/sports.jpg',
         Desc: "Stay up-to-date with the latest health news and trends.",
     },

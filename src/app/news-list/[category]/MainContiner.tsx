@@ -1,19 +1,21 @@
 import React from 'react'
 import styles from './page.module.css'
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Iprops {
-    latestNews: News.item[]
+    latestNews: News.Idata[]
     catagory: string
 }
 function MainContiner(props: Iprops) {
     return (
-
         <div className={styles.Continer}>
             <div className={styles.continer}>
                 {props.latestNews.map((item, index) => {
                     return (
-                        <div div key={index} className={styles.item} >
+                        <Link
+                        href={`/news/${item.slug}`}
+                         key={index} className={styles.item} >
                             <h1>{item.title}</h1>
                             <div className={styles.imgContiner}>
                                 <Image
@@ -24,8 +26,8 @@ function MainContiner(props: Iprops) {
                                     fill
                                 />
                             </div>
-                            <p>{item.Desc}</p>
-                        </div>
+                            <p>{item.content}</p>
+                        </Link>
                     )
                 })
                 }

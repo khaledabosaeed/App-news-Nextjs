@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Roboto, Mulish } from "next/font/google";
+// import { Roboto, Mulish } from "next/font/google";
 import Headr from "@/src/app/_Components/Header/Headr";
 import "./globals.css";
 
-const Robotofont = Roboto({
-  variable: "--font-roboto",
-  subsets: ["greek"],
-  fallback: ["Arial"]
-});
-const Mulishfont = Mulish({
-  variable: "--font-Mulishfont",
-  subsets: ["latin"],
-  fallback: ["Arial"],
-  display: "swap"
-});
+// const Robotofont = Roboto({
+//   variable: "--font-roboto",
+//   subsets: ["greek"],
+//   fallback: ["Arial"]
+// });
+// const Mulishfont = Mulish({
+//   variable: "--font-Mulishfont",
+//   subsets: ["latin"],
+//   fallback: ["Arial"],
+//   display: "swap"
+// });
 
 export const metadata: Metadata = {
   title: "News App",
@@ -22,22 +22,22 @@ export const metadata: Metadata = {
 
 interface Iprops {
   children: React.ReactNode;
-  usNews: React.ReactNode;
-  ukNews: React.ReactNode;
+  // usNews: React.ReactNode;
+  // ukNews: React.ReactNode;
 }
-export default function RootLayout({ usNews, ukNews, children }: Iprops) {
+export default function RootLayout({ children }: Iprops) {
 
   return (
     <html
       lang="en"
-      className={`${Mulishfont.className} ${Robotofont.className} `}>
+      >
       <body>
         <Headr />
         {children}
         {false && (
           <>
-            <section> {usNews}</section>
-            <section> {ukNews}</section>
+            {/* <section> {usNews}</section>
+            <section> {ukNews}</section> */}
           </>
         )}
       </body>

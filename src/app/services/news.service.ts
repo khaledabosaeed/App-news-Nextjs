@@ -1,37 +1,40 @@
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import sql from 'better-sqlite3'
-const db = sql('news.db')
-const getNews = (catagory: string): News.item[] => {
-    const news = db.prepare('SELECT * FROM news WHERE category = ?').all(catagory);
+const db = sql('news.db');
+
+const getNews = (catagory: string): News.Idata[] => {
+    const news = db.prepare(`SELECT * FROM items WHERE category = ?`).all(catagory)
     console.log(news);
-    
-    return news as News.item[];
+    return news as News.Idata[];
 }
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const getArticl = (slug: string): News.Idata => {
+    return db.prepare(`SELECT * FROM items WHERE slug = ?`).get(slug) as News.Idata;
+}
 /**
  * @deprecated
  */
-const fetchData = async (country: string, category: string) => {
-    const res = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${API_KEY}`, {
-        method: "GET"
-    });
-    const newsResponse = (await res.json()) as News.IRespons;
+// const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+// const fetchData = async (country: string, category: string) => {
+//     const res = await fetch(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${API_KEY}`, {
+//         method: "GET"
+//     });
+//     const newsResponse = (await res.json()) as News.IRespons;
 
-    let latestNews: News.item[] = [];
-    if (newsResponse.status === 'ok' && newsResponse.articles.length > 0) {
-        latestNews = newsResponse.articles.map(item => ({
-            title: item.title,
-            img: item.urlToImage,
-            Desc: item.description,
-            id: '1',
-            catagory: ''
-        }));
-    } else {
-        notFound();
-    }
-    return latestNews
-};
+//     let latestNews: News.item[] = [];
+//     if (newsResponse.status === 'ok' && newsResponse.articles.length > 0) {
+//         latestNews = newsResponse.articles.map(item => ({
+//             title: item.title,
+//             img: item.urlToImage,
+//             Desc: item.description,
+//             id: '1',
+//             catagory: ''
+//         }));
+//     } else {
+//         notFound();
+//     }
+//     return latestNews
+// };
 export {
-    fetchData,
-    getNews
+    getNews,
+    getArticl
 }

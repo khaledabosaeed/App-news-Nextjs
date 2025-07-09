@@ -27,11 +27,11 @@ declare namespace News {
         id: number,
         title: string,
         slug: string,
-        image: null,
+        image: string,
         content: string,
         author: string,
         author_email: string,
         date: number,
-        category: string
+        // category: string
     }
 }
