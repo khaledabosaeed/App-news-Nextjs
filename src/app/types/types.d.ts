@@ -24,14 +24,13 @@ declare namespace News {
         Desc: string;
     }
     export interface Idata {
-        id: number,
         title: string,
         slug: string,
         image: string,
         content: string,
         author: string,
-        author_email: string,
-        date: number,
-        // category: string
+        authorEmail: string,
+        date: string,
+        category: string
     }
 }
