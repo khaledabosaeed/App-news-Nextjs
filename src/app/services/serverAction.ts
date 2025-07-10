@@ -6,7 +6,6 @@ import { addArticl } from "./news.service";
 import { redirect } from 'next/navigation'
 import { AllwoowllAll } from "../data/catagory";
 
-
 const hundleSubmit = async ( prevStata:{valdtion:string[]}, fromData: FormData) => {
   const title = xss(fromData.get('title') as string);
   const newItem: News.Idata = {
