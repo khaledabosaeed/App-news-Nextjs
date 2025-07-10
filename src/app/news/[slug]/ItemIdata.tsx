@@ -11,7 +11,6 @@ function ItemIdata({ article }: IProps) {
     <div className={styles.container}>
       <div className={styles.card}>
         <h1 className={styles.title}>{article.title}</h1>
-
         {article.image && (
           <div className={styles.imgWrapper}>
             <Image
@@ -24,7 +23,6 @@ function ItemIdata({ article }: IProps) {
             />
           </div>
         )}
-
         <p className={styles.content}>{article.content}</p>
       </div>
     </div>

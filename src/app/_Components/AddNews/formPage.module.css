@@ -76,3 +76,11 @@
   background-color: #22d3ee;
   transform: scale(1.02);
 }
+.error{
+  color:red;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  margin-bottom:.5rem;
+  margin-left: 10px;
+}
