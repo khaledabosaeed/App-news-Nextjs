@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Iprops) {
   return (
     <html
       lang="en"
-      >
+    >
       <body>
         <Headr />
         {children}

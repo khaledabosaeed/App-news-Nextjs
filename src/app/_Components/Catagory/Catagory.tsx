@@ -16,7 +16,7 @@ function Catagory(props: Iprops) {
                             <div className={styles.imgContiner}>
                                 <Image
                                     className={styles.img}
-                                    src={item.img}
+                                    src={item.image}
                                     alt='new-image'
                                     style={{ objectFit: "cover" }}
                                     fill

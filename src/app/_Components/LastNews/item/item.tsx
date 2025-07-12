@@ -11,7 +11,9 @@ interface Iprops {
 function Item({ title, summary, href, isHighlited }: Iprops) {
     return (
         <div className={styles.newsGrid}>
-            <Link href={href} className={`${styles.newsCard} ${isHighlited ? styles.fetuerd : ''}`}>
+            <Link href={href} 
+            className={`${styles.newsCard}
+            ${isHighlited ? styles.fetuerd : ''}`}>
                 <h3>{title}</h3>
                 <p>{summary}</p>
             </Link>
