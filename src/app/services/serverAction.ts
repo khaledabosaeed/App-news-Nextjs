@@ -45,7 +45,6 @@ const hundleSubmit = async ( prevStata:{valdtion:string[]}, fromData: FormData) 
     valdtion
   }
   }
-
   addArticl(newItem);
   redirect("/")
 }

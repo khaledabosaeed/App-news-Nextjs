@@ -126,7 +126,8 @@ const articles = [
   },
 ];
 
-db.prepare(`
+db.prepare(
+  `
   CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
@@ -138,8 +139,8 @@ db.prepare(`
     date INTEGER NOT NULL,
     category TEXT NOT NULL
   );
-`).run();
-
+`
+).run();
 
 const insertToData = () => {
   const insertCommand = db.prepare(`
@@ -163,7 +164,6 @@ const insertToData = () => {
       @category
     )
   `);
-
   for (const item of articles) {
     insertCommand.run({
       title: item.title,
@@ -173,9 +173,32 @@ const insertToData = () => {
       author: item.author,
       author_email: item.author_email,
       date: item.date,
-      category:item.category,
+      category: item.category,
     });
   }
 };
 
 insertToData();
+
+const preperUsers = () => {
+  db.prepare(
+    `
+  CREATE TABLE IF NOT EXISTS Users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL,
+    name TEXT NOT NULL
+    );
+`
+  ).run();
+};
+db.prepare(
+  `
+  INSERT INTO Users (email, password, role, name) VALUES 
+  ('admin@example.com', 'password123', 'admin', 'Admin User'),  
+  ('user1@example.com', 'pass456', 'user', 'User One'),
+  ('user2@example.com', 'pass789', 'user', 'User Two')
+`
+).run();
+preperUsers();

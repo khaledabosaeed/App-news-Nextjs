@@ -13,14 +13,14 @@ const getArticl = (slug: string): News.Idata => {
 
 const addArticl = (item: News.Idata) => {
     db.prepare(`INSERT INTO items (
-  title,
-      slug,
-      image,
-      content,
-      author,
-      author_email,
-      date,
-      category
+    title,
+    slug,
+    image,
+    content,
+    author,
+    author_email,
+    date,
+    category
     )
 VALUES (
     @title,
