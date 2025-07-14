@@ -31,6 +31,31 @@ VALUES (
     @category)`)
         .run(item);
 }
+
+const addUser = (user: News.Iuser) => {
+    db.prepare(`INSERT INTO items (
+    email,
+    name,
+    password,
+    role
+    )
+VALUES (
+    @email,
+    @name,
+    @password,
+    @role,`).run(user);
+}
+export {
+    getNews,
+    getArticl,
+    addArticl,
+    addUser
+}
+
+
+
+
+
 /**
  * @deprecated
  */
@@ -55,8 +80,3 @@ VALUES (
 //     }
 //     return latestNews
 // };
-export {
-    getNews,
-    getArticl,
-    addArticl
-}

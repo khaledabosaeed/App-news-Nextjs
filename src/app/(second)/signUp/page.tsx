@@ -1,9 +1,14 @@
 import React from 'react'
+import SignUp from '../../_Components/signUp/SignUp'
+
 
 function Page() {
     return (
-        <div>Sign Up</div>
+        <>
+            <SignUp />
+        </>
     )
 }
+
 
 export default Page

@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '../../_Components/login/Login'
+import Login from '../../../_Components/login/Login'
 
 function page() {
     return (

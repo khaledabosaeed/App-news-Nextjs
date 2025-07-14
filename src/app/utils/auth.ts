@@ -7,7 +7,6 @@ const comparePassword = (password: string, hash: string): boolean => {
 };
 const hashPassword = (password: string): string => {
     return hashSync(password);
-
 }
 const genrateToken = (user: News.Iuser) => {
     const token = jwt.sign(

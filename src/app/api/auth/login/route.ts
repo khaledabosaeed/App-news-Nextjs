@@ -11,8 +11,7 @@ const POST = async (request: NextRequest) => {
     if (!user) {
         return new NextResponse("Invalid credentials", { status: 401 });
     }
-    const isValid = comparePassword(password, user.password || "");
-
+    const isValid = comparePassword(password, user.password as string);
     if (!isValid) {
         return new NextResponse("Invalid credentials", { status: 401 });
     }
@@ -20,6 +19,7 @@ const POST = async (request: NextRequest) => {
     const token = genrateToken(user)
     return new NextResponse(token, { status: 200 });
 }
+
 export {
     POST
 }

@@ -28,7 +28,7 @@ interface Iprops {
 export default function RootLayout({ children }: Iprops) {
 
   return (
-    <html lang="en">
+    <html lang="en" webcrx="false">
       <body>
         <Headr />
         {children}
