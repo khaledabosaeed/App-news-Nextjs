@@ -1,5 +1,5 @@
 import React from 'react'
-import { getArticl } from '../../services/news.service';
+import { getArticl } from '../../../services/news.service';
 import ItemIdata from './ItemIdata';
 
 
@@ -16,4 +16,4 @@ const Page = async (props: Iprops) => {
     )
 }
 
-export default Page
+export default Page 
