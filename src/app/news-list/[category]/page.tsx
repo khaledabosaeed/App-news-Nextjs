@@ -6,9 +6,7 @@ import styles from './page.module.css'
 interface Iporops {
     params: Promise<{ category: string }>
 }
-
 let category = ''
-
 const Page = async ({ params }: Iporops) => {
     category = (await params).category;
     const latestNews: News.Idata[] =  getNews(category);

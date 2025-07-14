@@ -5,7 +5,6 @@ import Image from 'next/image'
 interface IProps {
   article: News.Idata
 }
-
 function ItemIdata({ article }: IProps) {
   return (
     <div className={styles.container}>

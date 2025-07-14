@@ -1,0 +1,88 @@
+.continer {
+  background: #111827;
+  color: #f3f4f6;
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* backdrop-filter: blur(6px); */
+}
+
+h1 {
+  text-align: center;
+  color: #0ea5e9; /* Cyan-500 */
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 0.75rem 1rem;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background-color: #1f2937;
+  color: #e5e7eb;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+}
+
+button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Login button */
+.login {
+  background-color: #0ea5e9;
+  color: #fff;
+}
+.login:hover {
+  background-color: #0284c7;
+}
+
+/* Register button */
+.register {
+  background-color: transparent;
+  border: 1px solid #0ea5e9;
+  color: #0ea5e9;
+}
+.register:hover {
+  background-color: #0ea5e920;
+}
+
+/* Google button */
+.google {
+  background: #fff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+.google:hover {
+  background: #f3f4f6;
+}

@@ -1,4 +1,4 @@
- const Catagorydata: News.catagory[] = [
+const Catagorydata: News.catagory[] = [
     {
         title: "sports",
         image: '/CatagoryImage/finance.png',

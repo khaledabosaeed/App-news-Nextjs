@@ -1,4 +1,3 @@
-// import { notFound } from "next/navigation";
 import sql from 'better-sqlite3'
 const db = sql('news.db');
 
@@ -10,7 +9,6 @@ const getNews = (catagory: string): News.Idata[] => {
 const getArticl = (slug: string): News.Idata => {
     return db.prepare(`SELECT * FROM items WHERE slug = ?`).get(slug) as News.Idata;
 }
-
 const addArticl = (item: News.Idata) => {
     db.prepare(`INSERT INTO items (
     title,
