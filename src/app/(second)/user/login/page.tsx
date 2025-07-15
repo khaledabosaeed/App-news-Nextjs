@@ -1,6 +1,5 @@
 import React from 'react'
 import Login from '../../../_Components/login/Login'
-import { NextRequest } from 'next/server'
 import { toast } from 'react-toastify';
 
 interface Iprops {
