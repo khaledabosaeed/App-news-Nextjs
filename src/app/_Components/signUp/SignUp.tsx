@@ -18,6 +18,7 @@ function SignUp() {
             method: "POST",
             body: JSON.stringify({ email, name, password, role }),
             headers: { "Content-Type": "appliction/josn" },
+            credentials: "include",
         });
         if (req.ok) {
             const token = await req.text();

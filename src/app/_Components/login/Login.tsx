@@ -11,26 +11,32 @@ import styles from './Login.module.css'
 function Login() {
     const hundleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const eamil = e.currentTarget['email'].value;
-        const password = e.currentTarget['password'].value;
-        console.log(eamil);
+        const email = (e.currentTarget["email"] as HTMLInputElement).value;
+        const password = (e.currentTarget["password"] as HTMLInputElement).value;
+        console.log(email);
         console.log(password);
-        const req = await fetch('/api/user/login', {
+        const req = await fetch("/api/auth/login", {
             method: "POST",
-            body: JSON.stringify({ eamil, password }),
-            headers: { 'Content-Type': "appliction/josn" }
-        })
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: "include", // required if token is set in cookies by server
+        });
         if (req.ok) {
             const token = await req.text();
             console.log(token);
             const user = varvfiy(token);
+            localStorage.setItem("auth-user", JSON.stringify(user));
+            redirect("/");
             // if you dont have access token and user you can use the jwt.decode to decode the token and get the user data
             // const user1= jwt.decode(token)
             // put the auth iside the auth context
             // and inside the local storage
-            localStorage.setItem("auth-token", token);
-            localStorage.setItem("auth-user", JSON.stringify(user));
-            redirect("/");
+            /**
+             *delete from loaclStorage and save as a cookies in the login page to send it with every request 
+             *localStorage.setItem("auth-token", token);
+             */
         } else {
             toast.error("Invalid email or password!", {
                 position: "top-right",

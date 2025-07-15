@@ -1,10 +1,10 @@
 import sql from 'better-sqlite3'
 const db = sql('news.db');
-const login = (email: string): News.Iuser => {
-    const login = db
+const login = (email: string): News.Iuser | null => {
+    const user = db
         .prepare(`SELECT * FROM Users WHERE email = ?`)
         .get(email);
-    return login as News.Iuser;
+    return user ? (user as News.Iuser) : null;
 }
 const exists = (email: string): boolean => {
     const exisit = db.prepare("SELECT * FROM Users WHERE email = ?").get(email);

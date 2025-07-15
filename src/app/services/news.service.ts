@@ -3,7 +3,7 @@ const db = sql('news.db');
 
 const getNews = (catagory: string): News.Idata[] => {
     const news = db.prepare(`SELECT * FROM items WHERE category = ?`).all(catagory)
-    console.log(news);
+    // console.log(news);
     return news as News.Idata[];
 }
 const getArticl = (slug: string): News.Idata => {
@@ -33,7 +33,7 @@ VALUES (
 }
 
 const addUser = (user: News.Iuser) => {
-    db.prepare(`INSERT INTO items (
+    db.prepare(`INSERT INTO Users (
     email,
     name,
     password,
@@ -43,7 +43,9 @@ VALUES (
     @email,
     @name,
     @password,
-    @role,`).run(user);
+    @role
+    )
+    `).run(user);
 }
 export {
     getNews,
