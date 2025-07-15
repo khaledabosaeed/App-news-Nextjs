@@ -9,7 +9,6 @@ const POST = async (request: NextRequest) => {
         return new NextResponse("Invalid credentials", { status: 401 });
     }
     const user = (login(email));
-    console.log(user);
     if (!user) {
         return new NextResponse("Invalid credentials", { status: 401 });
     }
@@ -19,11 +18,11 @@ const POST = async (request: NextRequest) => {
     }
     delete user.password;
     const token = genrateToken(user);
-
     (await cookies()).set("auth-token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 3600,
+        secure: process.env.NODE_ENV === "production",
+        path: "/", 
+        maxAge: 3600, // 1 hour
     });
     return NextResponse.json({ token });
 };
