@@ -1,9 +1,17 @@
 import React from 'react'
+import styles from './page.module.css';
+import Link from 'next/link';
 
-function Notfound() {
+function NotFound() {
   return (
-    <div>Notfound</div>
-  )
+    <div className={styles.notFoundWrapper}>
+      <div className={styles.notFoundBox}>
+        <h1>404</h1>
+        <p>Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
+        <Link href="/">Back to Home</Link>
+      </div>
+    </div>
+  );
 }
 
-export default Notfound
+export default NotFound

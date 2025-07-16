@@ -31,7 +31,12 @@ const isAuth = async (token: string, req: NextRequest) => {
 export const middleware = async (req: NextRequest) => {
   console.log("🔥 Middleware running:", req.nextUrl.pathname);
   const token = req.cookies.get("auth-token")?.value;
-
+  const res = await isAuth(token as string, req) as News.Iuser;
+  if (res instanceof (NextResponse)) {
+    return res;
+  }
+  console.log(res);
+  
   switch (req.nextUrl.pathname) {
     case '/Admin': {
       const res = await isAuth(token as string, req) as News.Iuser;
@@ -39,11 +44,8 @@ export const middleware = async (req: NextRequest) => {
         return res;
       }
       if (res.role !== "admin") {
-        return NextResponse.redirect(new URL("/", req.url), {
-          headers: {
-            errorMassage: "somthing is wrong log in again!!"
-          }
-        });
+        console.log(res.role);
+        return NextResponse.redirect(new URL("/", req.url));
       }
     }
       break;
@@ -54,11 +56,7 @@ export const middleware = async (req: NextRequest) => {
         return user;
       } console.log(user.role);
       if (user.role !== "admin" && user.role !== "user") {
-        return NextResponse.redirect(new URL("/", req.url), {
-          headers: {
-            errorMassage: "somthing is wrong log in again!!"
-          }
-        });
+        return NextResponse.redirect(new URL("/", req.url));
       }
     }
       break;

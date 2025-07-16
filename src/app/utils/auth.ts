@@ -1,34 +1,38 @@
 import { compareSync, hashSync } from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { jwtVerify, SignJWT } from "jose";
 
 const Jwt = process.env.JWT_TOKEN;
+const secret = new TextEncoder().encode(Jwt);
+
 const comparePassword = (password: string, hash: string): boolean => {
     return compareSync(password, hash);
 };
 const hashPassword = (password: string): string => {
     return hashSync(password);
 }
-const genrateToken = (user: News.Iuser) => {
-    const token = jwt.sign(
-        {
-            email: user.email,
-            name: user.name,
-            role: user.role,
-        },
-        Jwt as string,
-        {
-            expiresIn: "24h",
-        }
-    );
-    return token;
+const genrateToken = async (user: News.Iuser) => {
+    return await new SignJWT({
+        email: user.email,
+        name: user.name,
+        role: user.role,
+    })
+        .setProtectedHeader({ alg: "HS256" })
+        .setIssuedAt()
+        .setExpirationTime("1h")
+        .sign(secret);
 }
 
-const varvfiy = (token: string): News.Iuser | null => {
+const varvfiy = async (token: string): Promise<News.Iuser | null> => {
+    console.log("🔐 Token:", token);
+    console.log("🔐 Secret:", secret, "| Type:", typeof secret);
+
     try {
-        const user = jwt.verify(token, Jwt as string);
-        return user as News.Iuser;
-    } catch {
-        return null
+        const { payload } = await jwtVerify(token, secret);
+        console.log("✅ Decoded Payload:", payload);
+        return (payload as News.Iuser) ;
+    } catch (error: any) {
+        console.error("❌ JWT Verification Error:", error.message);
+        return null;
     }
 }
 

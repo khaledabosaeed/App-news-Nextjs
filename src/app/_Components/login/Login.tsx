@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import React from 'react'
 import { varvfiy } from '../../utils/auth';
 import { toast } from "react-toastify";
@@ -11,8 +10,7 @@ function Login() {
         e.preventDefault();
         const email = (e.currentTarget["email"] as HTMLInputElement).value;
         const password = (e.currentTarget["password"] as HTMLInputElement).value;
-        console.log(email);
-        console.log(password);
+
         const req = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
@@ -22,19 +20,13 @@ function Login() {
             credentials: "include", // required if token is set in cookies by server
         });
         if (req.ok) {
+            console.log(req);
+                window.location.href = "/add-news";
+
             const token = await req.text();
-            console.log(token);
-            const user = varvfiy(token);
+            console.log("token from login"+token);
+            const user = await (varvfiy(token));
             localStorage.setItem("auth-user", JSON.stringify(user))
-            redirect("/");
-            // if you dont have access token and user you can use the jwt.decode to decode the token and get the user data
-            // const user1= jwt.decode(token)
-            // put the auth iside the auth context
-            // and inside the local storage
-            /**
-             *delete from loaclStorage and save as a cookies in the login page to send it with every request 
-             *localStorage.setItem("auth-token", token);
-             */
         } else {
             toast.error("Invalid email or password!", {
                 position: "top-right",
