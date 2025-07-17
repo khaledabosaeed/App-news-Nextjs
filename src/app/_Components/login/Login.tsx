@@ -20,9 +20,7 @@ function Login() {
             credentials: "include", // required if token is set in cookies by server
         });
         if (req.ok) {
-            console.log(req);
                 window.location.href = "/add-news";
-
             const token = await req.text();
             console.log("token from login"+token);
             const user = await (varvfiy(token));
@@ -32,7 +30,6 @@ function Login() {
                 position: "top-right",
             });
         }
-        console.log(req);
     }
     return (
         <div className={styles.container}>

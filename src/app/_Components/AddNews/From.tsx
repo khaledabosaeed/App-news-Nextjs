@@ -4,8 +4,8 @@ import styles from './formPage.module.css'
 import { hundleSubmit } from '../../services/serverAction'
 import Submit from './Submit'
 function From() {
+
     const [state, formAction, pending] = useActionState(hundleSubmit, { valdtion: [] })
-    console.log(pending);
     return (
         <div className={styles.wrapper}>
             <form className={styles.form} action={formAction}>

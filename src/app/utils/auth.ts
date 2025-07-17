@@ -20,18 +20,15 @@ const genrateToken = async (user: News.Iuser) => {
         .setIssuedAt()
         .setExpirationTime("1h")
         .sign(secret);
+
 }
-
 const varvfiy = async (token: string): Promise<News.Iuser | null> => {
-    console.log("🔐 Token:", token);
-    console.log("🔐 Secret:", secret, "| Type:", typeof secret);
-
     try {
-        const { payload } = await jwtVerify(token, secret);
+        const { payload } = await jwtVerify(token, secret)  ;
         console.log("✅ Decoded Payload:", payload);
-        return (payload as News.Iuser) ;
-    } catch (error: any) {
-        console.error("❌ JWT Verification Error:", error.message);
+        return (payload as unknown as News.Iuser);
+    } catch (error: unknown) {
+        console.log(error);
         return null;
     }
 }

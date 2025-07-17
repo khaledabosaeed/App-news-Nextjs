@@ -1,4 +1,3 @@
-// import { catagory } from './types.d';
 declare namespace News {
     export interface INews {
         description: string

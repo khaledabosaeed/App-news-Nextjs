@@ -22,7 +22,6 @@ function SignUp() {
         });
         if (req.ok) {
             const token = await req.text();
-            console.log(token);
             const user = varvfiy(token);
             localStorage.setItem("auth-token", token);
             localStorage.setItem("auth-user", JSON.stringify(user));

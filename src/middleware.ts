@@ -27,15 +27,12 @@ const isAuth = async (token: string, req: NextRequest) => {
   }
   return user;
 };
-
 export const middleware = async (req: NextRequest) => {
-  console.log("🔥 Middleware running:", req.nextUrl.pathname);
   const token = req.cookies.get("auth-token")?.value;
   const res = await isAuth(token as string, req) as News.Iuser;
   if (res instanceof (NextResponse)) {
     return res;
   }
-  console.log(res);
   
   switch (req.nextUrl.pathname) {
     case '/Admin': {
@@ -44,7 +41,6 @@ export const middleware = async (req: NextRequest) => {
         return res;
       }
       if (res.role !== "admin") {
-        console.log(res.role);
         return NextResponse.redirect(new URL("/", req.url));
       }
     }
@@ -54,14 +50,13 @@ export const middleware = async (req: NextRequest) => {
       const user = await isAuth(token as string, req) as News.Iuser;
       if (user instanceof (NextResponse)) {
         return user;
-      } console.log(user.role);
+      }
       if (user.role !== "admin" && user.role !== "user") {
         return NextResponse.redirect(new URL("/", req.url));
       }
     }
       break;
     default:
-
       break;
   }
 }

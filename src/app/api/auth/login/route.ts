@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { login } from "../../../services/auth";
 import { comparePassword, genrateToken } from "@/src/app/utils/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const POST = async (request: NextRequest) => {
     const { email, password } = await request.json() as { email: string; password: string };
@@ -27,5 +29,11 @@ const POST = async (request: NextRequest) => {
     maxAge: 60 * 60, // 1 hour
   });
     return res;
+};
+export const DELETE = async () => {
+    const cookieStore = (await cookies());
+    cookieStore.delete('auth-token');
+    redirect('/')
+    
 };
 export { POST };

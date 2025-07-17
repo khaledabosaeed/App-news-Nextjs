@@ -33,3 +33,15 @@
  .nav-links a.slected {
   color: #3b82f6;
 }
+.logout{
+   background-color: #ef4444; /* Tailwind red-500 */
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.375rem; /* rounded-md */
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+}
