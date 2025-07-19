@@ -1,53 +1,93 @@
-    // // context/AuthContext.tsx
+// context/AuthContext.tsx
 
-    // "use client";
+"use client";
 
-    // import { createContext, useContext, useEffect, useState } from "react";
-    // import { cookies } from "next/headers";
-    // import { varvfiy } from "../utils/auth"; // Adjust path
+import { createContext, useContext, useEffect, useState } from "react";
+import { varvfiy } from "../utils/auth"; // Adjust path
+import { toast } from "react-toastify";
+import { cookies } from "next/dist/server/request/cookies";
 
-    // interface Iuser {
-    //     token: string;
-    //     user: News.Iuser | null;
-    // }
+interface Iuser {
+    token: string;
+    user: News.Iuser | null;
+}
 
-    // interface IAuthContext {
-    //     user: Iuser;
-    //     setUser: (token: string) => void;
-    // }
+interface IAuthContext {
+    user: Iuser;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
+    loading: boolean;
+}
 
-    // // Initial state
-    // const INITIAL_STATE: Iuser = {
-    //     token: "",
-    //     user: null,
-    // };
+// Initial state
+const INITIAL_STATE: Iuser = {
+    token: "",
+    user: null,
+};
 
-    // // ✅ Create Context
-    // const AuthContext = createContext<IAuthContext>({
-    //     user: INITIAL_STATE,
-    //     setUser: () => { },
-    // });
+export const AuthContext = createContext<IAuthContext | null>({
+    user: INITIAL_STATE,
+    login: async () => { },
+    logout: async () => { },
+    loading: true,
+});
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+    const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
+    const [loading, setLoading] = useState(false);
+    const login = async (password: string, email: string) => {
+        const req = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: "include",
+        });
+        if (await req.ok) {
+            const data = await req.json(); // ✅ Parse JSON
+            const token = data.token;
+            console.log("Token from login:", token);
 
+            const user = await varvfiy(token); // Assuming this decodes the token
+            localStorage.setItem("auth-token", token);
+            setUserState({ token, user });
 
-    // export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    //     const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
-    //     const setUser = async (token: string) => {
-    //         (await cookies()).set("token", token);
-    //         const verifiedUser = await varvfiy(token);
-    //         setUserState({ token, user: verifiedUser });
-    //     };
-
-    //     useEffect(() => {
-    //         const token = (await cookies()).get("token");
-    //         if (typeof token === "string") setUser(token);
-    //     }, []);
-
-    //     return (
-    //         <AuthContext.Provider value={{ user, setUser }}>
-    //             {children}
-    //         </AuthContext.Provider>
-    //     )
-    // };
-
-    // // ✅ Hook to use context
-    // export const useAuth = () => useContext(AuthContext);
+            window.location.href = "/add-news";
+        } else {
+            const error = await req.text(); // Still handle text error messages
+            toast.error(error || "Invalid email or password", {
+                position: "top-right",
+            });
+        }
+    };
+    const logout = async () => {
+        await fetch('api/auth/login', {
+            method: 'DELETE',
+        });
+        setUserState(INITIAL_STATE);
+        window.location.href = "/";
+    }
+    useEffect(() => {
+        const loadUser = async () => {
+            const token = (await cookies()).get('auth-token'); // or get cookie if you prefer
+            if (typeof token === 'string') {
+                const user = await varvfiy(token);
+                setUserState({ token, user });
+            }
+            setLoading(false);
+        };
+        loadUser();
+    }, []);
+    return (
+        <AuthContext.Provider value={{ user, login, logout, loading }}>
+            {children}
+        </AuthContext.Provider>
+    )
+};
+export const useAuth = (): IAuthContext => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
+};

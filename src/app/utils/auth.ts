@@ -24,9 +24,9 @@ const genrateToken = async (user: News.Iuser) => {
 }
 const varvfiy = async (token: string): Promise<News.Iuser | null> => {
     try {
-        const { payload } = await jwtVerify(token, secret)  ;
+        const { payload } = await jwtVerify<News.Iuser>(token, secret);
         console.log("✅ Decoded Payload:", payload);
-        return (payload as unknown as News.Iuser);
+        return (payload as News.Iuser);
     } catch (error: unknown) {
         console.log(error);
         return null;

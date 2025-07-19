@@ -2,38 +2,35 @@ import { NextRequest, NextResponse } from "next/server"
 import { login } from "../../../services/auth";
 import { comparePassword, genrateToken } from "@/src/app/utils/auth";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 const POST = async (request: NextRequest) => {
-    const { email, password } = await request.json() as { email: string; password: string };
-    if (!email || !password) {
-        return new NextResponse("Invalid credentials", { status: 401 });
-    }
-    const user = (login(email));
-    if (!user) {
-        return new NextResponse("Invalid credentials", { status: 401 });
-    }
-    const isValid = comparePassword(password, user.password as string);
-    if (!isValid) {
-        return new NextResponse("Invalid credentials", { status: 401 });
-    }
-    delete user.password;
-    
-    const token = await genrateToken(user);
-    
-  const res = NextResponse.
-  redirect(new URL("/add-news", request.url));
+  const { email, password } = await request.json() as { email: string; password: string };
+  if (!email || !password) {
+    return new NextResponse("Invalid credentials", { status: 401 });
+  }
+  const user = await (login(email));
+  if (!user) {
+    return new NextResponse("Invalid credentials", { status: 401 });
+  }
+  const isValid = await comparePassword(password, user.password as string);
+  if (!isValid) {
+    return new NextResponse("Invalid credentials", { status: 401 });
+  }
+  delete user.password;
+
+  const token = await genrateToken(user);
+
+  const res = NextResponse.json({ token }); // return token as JSON
   res.cookies.set("auth-token", token, {
     httpOnly: true,
     path: "/",
     maxAge: 60 * 60, // 1 hour
   });
-    return res;
+  return res;
 };
-export const DELETE = async () => {
-    const cookieStore = (await cookies());
-    cookieStore.delete('auth-token');
-    redirect('/')
-    
+export const DELETE = async (request: NextRequest) => {
+  const cookieStore = (await cookies());
+  cookieStore.delete('auth-token');
+  NextResponse.redirect(new URL("/", request.url))
 };
 export { POST };

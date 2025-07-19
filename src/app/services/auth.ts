@@ -14,11 +14,17 @@ const exists = (email: string): boolean => {
         return false
     }
 };
-export {
-    login,
-    exists
+const handleLogout = async () => {
+    await fetch('api/auth/login', {
+        method: 'DELETE',
+    });
 };
 
+export {
+    login,
+    exists,
+    handleLogout
+};
 
 // const register = (user: News.Iuser): void => {
 //     const password = hashPassword(user.password as string);

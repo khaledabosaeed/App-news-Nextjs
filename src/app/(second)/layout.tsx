@@ -1,8 +1,8 @@
 // app/(second)/layout.tsx
 import type { Metadata } from "next";
 import { Roboto, Mulish } from "next/font/google";
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { Providers } from "../providers/provider";
 
 const Robotofont = Roboto({
   variable: "--font-roboto",
@@ -22,12 +22,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-    return (
+  return (
     <html lang="en">
-        <body className={`${Robotofont.variable} ${Mulishfont.variable}`}>
-            {children}
-            <ToastContainer />
-        </body>
+      <body className={`${Robotofont.variable} ${Mulishfont.variable}`}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
-);
+  );
 }
