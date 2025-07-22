@@ -7,16 +7,16 @@ import { AuthContext } from '../../context/auth.context'
 function Navbar() {
     const path = usePathname();
     const auth = useContext(AuthContext);
-
     if (!auth) return null;
-    const { logout } = auth;
+    const { logout } = auth
+
     return (
         <nav className={styles['nav-links']}>
             <Link href="/" className={path === '/' ? styles.slected : undefined}>Home</Link>
             <Link href="/add-news" className={path === '/add-news' ? styles.slected : undefined}>Add news</Link>
             <Link href="/Admin" className={path.startsWith('/Admin') ? styles.slected : undefined}>Admin </Link>
             <Link href="/Catagories" className={path.startsWith('/Catagories') ? styles.slected : undefined}>Catagories</Link>
-            {false && <button className={styles.logout} onClick={logout} >logout</button>}
+            <button type='button' className={styles.logout} onClick={logout} >logout</button>
         </nav>
     )
 }

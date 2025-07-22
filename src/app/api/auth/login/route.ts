@@ -28,9 +28,10 @@ const POST = async (request: NextRequest) => {
   });
   return res;
 };
+
 export const DELETE = async (request: NextRequest) => {
   const cookieStore = (await cookies());
   cookieStore.delete('auth-token');
-  NextResponse.redirect(new URL("/", request.url))
+  return NextResponse.redirect(new URL("/", request.url))
 };
 export { POST };

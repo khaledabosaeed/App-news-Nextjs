@@ -34,42 +34,40 @@ export const AuthContext = createContext<IAuthContext | null>({
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
     const [loading, setLoading] = useState(false);
-    const login = async (password: string, email: string) => {
+    const login = async (email: string, password: string) => {
         const req = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ password, email }),
             credentials: "include",
         });
-        if (await req.ok) {
+        if (req.status === 200) {
             const data = await req.json(); // ✅ Parse JSON
             const token = data.token;
             console.log("Token from login:", token);
-
             const user = await varvfiy(token); // Assuming this decodes the token
             localStorage.setItem("auth-token", token);
             setUserState({ token, user });
-
             window.location.href = "/add-news";
         } else {
             const error = await req.text(); // Still handle text error messages
             toast.error(error || "Invalid email or password", {
                 position: "top-right",
             });
+            console.log(error);
         }
     };
     const logout = async () => {
-        await fetch('api/auth/login', {
+        console.log("clicked");
+        await fetch('/api/auth/login', {
             method: 'DELETE',
         });
-        setUserState(INITIAL_STATE);
-        window.location.href = "/";
     }
     useEffect(() => {
         const loadUser = async () => {
-            const token = (await cookies()).get('auth-token'); // or get cookie if you prefer
+            const token = (await cookies()).get('auth-token');
             if (typeof token === 'string') {
                 const user = await varvfiy(token);
                 setUserState({ token, user });

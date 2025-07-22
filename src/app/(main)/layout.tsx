@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import { Roboto, Mulish } from "next/font/google";
 import Headr from "@/src/app/_Components/Header/Headr";
 import "./globals.css";
+import { Providers } from "../providers/provider";
 
 // const Robotofont = Roboto({
 //   variable: "--font-roboto",
@@ -27,13 +28,15 @@ interface Iprops {
   // usNews: React.ReactNode;
   // ukNews: React.ReactNode;
 }
-export default function RootLayout({ children  }: Iprops) {
+export default function RootLayout({ children }: Iprops) {
 
   return (
     <html lang="en" >
       <body>
         <Headr />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         {false && (
           <>
             {/* <section> {usNews}</section>
