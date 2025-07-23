@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { login } from "../../../services/auth";
 import { comparePassword, genrateToken } from "@/src/app/utils/auth";
-import { cookies } from "next/headers";
 
 const POST = async (request: NextRequest) => {
   const { email, password } = await request.json() as { email: string; password: string };
@@ -20,7 +19,13 @@ const POST = async (request: NextRequest) => {
 
   const token = await genrateToken(user);
 
-  const res = NextResponse.json({ token }); // return token as JSON
+  const res = NextResponse.json({
+    success: true,
+    data: {
+      token,
+      user
+    }
+  }); // return token as JSON
   res.cookies.set("auth-token", token, {
     httpOnly: true,
     path: "/",
@@ -29,9 +34,5 @@ const POST = async (request: NextRequest) => {
   return res;
 };
 
-export const DELETE = async (request: NextRequest) => {
-  const cookieStore = (await cookies());
-  cookieStore.delete('auth-token');
-  return NextResponse.redirect(new URL("/", request.url))
-};
+
 export { POST };

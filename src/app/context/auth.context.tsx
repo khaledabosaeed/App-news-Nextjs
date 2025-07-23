@@ -2,10 +2,8 @@
 
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { varvfiy } from "../utils/auth"; // Adjust path
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { cookies } from "next/dist/server/request/cookies";
 
 interface Iuser {
     token: string;
@@ -16,7 +14,6 @@ interface IAuthContext {
     user: Iuser;
     login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
-    loading: boolean;
 }
 
 // Initial state
@@ -25,15 +22,10 @@ const INITIAL_STATE: Iuser = {
     user: null,
 };
 
-export const AuthContext = createContext<IAuthContext | null>({
-    user: INITIAL_STATE,
-    login: async () => { },
-    logout: async () => { },
-    loading: true,
-});
+export const AuthContext = createContext<IAuthContext | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const login = async (email: string, password: string) => {
         const req = await fetch("/api/auth/login", {
             method: "POST",
@@ -45,12 +37,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
         if (req.status === 200) {
             const data = await req.json(); // ✅ Parse JSON
-            const token = data.token;
-            console.log("Token from login:", token);
-            const user = await varvfiy(token); // Assuming this decodes the token
-            localStorage.setItem("auth-token", token);
+            const { token, user } = data.data;  // Assuming this decodes the token
             setUserState({ token, user });
             window.location.href = "/add-news";
+            localStorage.setItem("auth-token", token);
+            localStorage.setItem("auth-user", JSON.stringify(user));
         } else {
             const error = await req.text(); // Still handle text error messages
             toast.error(error || "Invalid email or password", {
@@ -61,23 +52,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
     const logout = async () => {
         console.log("clicked");
-        await fetch('/api/auth/login', {
-            method: 'DELETE',
+        await fetch('/api/auth/logout', {
+            method: 'POST',
         });
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('auth-user');
+        setUserState(INITIAL_STATE);
     }
-    useEffect(() => {
-        const loadUser = async () => {
-            const token = (await cookies()).get('auth-token');
-            if (typeof token === 'string') {
-                const user = await varvfiy(token);
-                setUserState({ token, user });
-            }
-            setLoading(false);
-        };
-        loadUser();
-    }, []);
+    // useEffect(() => {
+    //     const loadUser = async () => {
+    //         const token = localStorage.getItem('auth-token');
+    //         const user = (localStorage.getItem('auth-user')) as News.Iuser;
+    //         if (typeof token === 'string') {
+    //             setUserState({ token, user });
+    //         }
+    //         setLoading(false);
+    //     };
+    //     loadUser();
+    // }, []);
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
