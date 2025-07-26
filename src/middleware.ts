@@ -45,7 +45,6 @@ export const middleware = async (req: NextRequest) => {
       }
     }
       break;
-
     case '/add-news': {
       const user = await isAuth(token as string, req) as News.Iuser;
       if (user instanceof (NextResponse)) {

@@ -33,7 +33,7 @@ function LastNews() {
     ];
 
     return (
-        <section className={styles.newsSection}>
+        <section className={`${styles.newsSection} ${styles.animateIn}`}    >
             <h2 className={styles.newsHeading}>🗞️ Latest News</h2>
             <div className={styles.newsGrid}>
                 {newsItems.map((item, index) =>

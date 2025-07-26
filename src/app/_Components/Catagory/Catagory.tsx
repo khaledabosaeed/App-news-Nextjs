@@ -7,28 +7,35 @@ interface Iprops {
 }
 function Catagory(props: Iprops) {
     return (
+      <>
+        <h2 className={styles.catagoryTitle}> Our Catagory</h2>
         <div className={styles.catagory}>
-            {props.data.map((item, index) => {
-                return (
-                    <Link href={"/news-list/" + item.title} key={index} className={styles.link}>
-                        <div className={styles.catagoryItem} >
-                            <h1>{item.title}</h1>
-                            <div className={styles.imgContiner}>
-                                <Image
-                                    className={styles.img}
-                                    src={item.image}
-                                    alt='new-image'
-                                    style={{ objectFit: "cover" }}
-                                    fill
-                                />
-                            </div>
-                            <p>{item.Desc}</p>
-                        </div>
-                    </Link>
-                )
-            })}
+          {props.data.map((item, index) => {
+            return (
+              <Link
+                href={"/news-list/" + item.title}
+                key={index}
+                className={styles.link}
+              >
+                <div className={styles.catagoryItem}>
+                  <h1>{item.title}</h1>
+                  <div className={styles.imgContiner}>
+                    <Image
+                      className={styles.img}
+                      src={item.image}
+                      alt="new-image"
+                      style={{ objectFit: "cover" }}
+                      fill
+                    />
+                  </div>
+                  <p>{item.Desc}</p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-    )
+      </>
+    );
 }
 
 

@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-// import { Roboto, Mulish } from "next/font/google";
+import { Roboto, Mulish } from "next/font/google";
 import Headr from "@/src/app/_Components/Header/Headr";
 import "./globals.css";
 import { Providers } from "../providers/provider";
+import Footer from "../_Components/footer/Footer";
 
-// const Robotofont = Roboto({
-//   variable: "--font-roboto",
-//   subsets: ["greek"],
-//   fallback: ["Arial"]
-// });
-// const Mulishfont = Mulish({
-//   variable: "--font-Mulishfont",
-//   subsets: ["latin"],
-//   fallback: ["Arial"],
-//   display: "swap"
-// });
+const Robotofont = Roboto({
+  variable: "--font-roboto",
+  subsets: ["greek"],
+  fallback: ["Arial"]
+});
+const Mulishfont = Mulish({
+  variable: "--font-Mulishfont",
+  subsets: ["latin"],
+  fallback: ["Arial"],
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: {
@@ -25,24 +26,18 @@ export const metadata: Metadata = {
 };
 interface Iprops {
   children: React.ReactNode;
-  // usNews: React.ReactNode;
-  // ukNews: React.ReactNode;
+
 }
 export default function RootLayout({ children }: Iprops) {
 
   return (
-    <html lang="en" >
+    <html lang="en" className={`${Robotofont.variable}${Mulishfont.variable}`}>
       <body>
         <Providers>
-        <Headr />
+          <Headr />
           {children}
         </Providers>
-        {false && (
-          <>
-            {/* <section> {usNews}</section>
-            <section> {ukNews}</section> */}
-          </>
-        )}
+        <Footer/>
       </body>
     </html>
   );

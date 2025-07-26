@@ -8,7 +8,7 @@ function Hero() {
       <p className={styles.heroSubtitle}>
         Get the latest news from around the world — all in one place.
       </p>
-      <Link href="/world" className={styles.ctaButton}>
+      <Link href="/Catagories" className={styles.ctaButton}>
         Explore Headlines
       </Link>
     </section>

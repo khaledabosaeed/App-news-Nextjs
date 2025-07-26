@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto, Mulish } from "next/font/google";
 import 'react-toastify/dist/ReactToastify.css';
 import { Providers } from "../providers/provider";
+import Headr from "../_Components/Header/Headr";
 
 const Robotofont = Roboto({
   variable: "--font-roboto",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${Robotofont.variable} ${Mulishfont.variable}`}>
         <Providers>
+          <Headr />
           {children}
         </Providers>
       </body>

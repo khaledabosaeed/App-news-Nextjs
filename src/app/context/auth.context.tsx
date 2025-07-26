@@ -23,6 +23,7 @@ const INITIAL_STATE: Iuser = {
 };
 
 export const AuthContext = createContext<IAuthContext | null>(null);
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
     // const [loading, setLoading] = useState(false);
@@ -39,9 +40,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const data = await req.json(); // ✅ Parse JSON
             const { token, user } = data.data;  // Assuming this decodes the token
             setUserState({ token, user });
-            window.location.href = "/add-news";
             localStorage.setItem("auth-token", token);
             localStorage.setItem("auth-user", JSON.stringify(user));
+            window.location.href = "/add-news";
+            return data;
         } else {
             const error = await req.text(); // Still handle text error messages
             toast.error(error || "Invalid email or password", {
@@ -58,6 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem('auth-token');
         localStorage.removeItem('auth-user');
         setUserState(INITIAL_STATE);
+        window.location.href = "/";
     }
     // useEffect(() => {
     //     const loadUser = async () => {
