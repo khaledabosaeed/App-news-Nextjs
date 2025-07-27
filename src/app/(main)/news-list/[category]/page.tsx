@@ -18,13 +18,13 @@ const Page = async ({ params }: IProps) => {
     category = (await params).category;
     const latestNews: News.Idata[] = getNews(category);
     return (
-        <div >
-            <h1 className={styles.title}>{category.toUpperCase() + ""}NEWS</h1>
-            <Suspense fallback={<span className={styles.loader}></span>}>
-                <MainContiner latestNews={latestNews} catagory={category} />
-            </Suspense >
-        </div >
-    )
+      <div className="container">
+        <h1 className={styles.title}>{category.toUpperCase() + ""}NEWS</h1>
+        <Suspense fallback={<span className={styles.loader}></span>}>
+          <MainContiner latestNews={latestNews} catagory={category} />
+        </Suspense>
+      </div>
+    );
 }
 
 export default Page

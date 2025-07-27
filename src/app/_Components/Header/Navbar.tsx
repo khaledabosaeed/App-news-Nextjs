@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import styles from './Headr.module.css'
 import { usePathname } from 'next/navigation'
 import { AuthContext } from '../../context/auth.context'
-function Navbar() {
+function Navbar({ isMenuOpen }: { isMenuOpen: boolean }) {
     const [userU, setUser] = useState<News.Iuser | null>(null);
     useEffect(() => {
         const us = localStorage.getItem('auth-user');
@@ -18,7 +18,7 @@ function Navbar() {
     if (!auth) return null;
     const { logout } = auth;
     return (
-        <nav className={styles["nav-links"]}>
+        <nav className={`${styles.navLinks} ${isMenuOpen ? styles.show : ''}`}>
             <Link href="/" className={path === "/" ? styles.slected : undefined}>
                 Home
             </Link>

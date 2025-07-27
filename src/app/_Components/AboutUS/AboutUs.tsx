@@ -4,7 +4,7 @@ function AboutUs() {
     return (
         <section className={styles.aboutsection}>
             <div className={styles.aboutcontent}>
-                <h2>📢 About NewsNow</h2>
+                <h2>About NewsNow</h2>
                 <p>
                     NewsNow is a user-powered news platform where anyone can stay informed and share their voice with the world. Whether you&apos;re passionate about technology, sports, health, or global events — this is your space to read, contribute, and connect.
                 </p>
