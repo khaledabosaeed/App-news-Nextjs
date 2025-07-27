@@ -31,13 +31,13 @@ interface Iprops {
 export default function RootLayout({ children }: Iprops) {
 
   return (
-    <html lang="en" className={`${Robotofont.variable}${Mulishfont.variable}`}>
+    <html lang="en" className={`${Robotofont.variable} ${Mulishfont.variable}`}>
       <body>
         <Providers>
           <Headr />
           {children}
         </Providers>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

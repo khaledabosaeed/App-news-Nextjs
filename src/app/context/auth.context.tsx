@@ -26,7 +26,6 @@ export const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUserState] = useState<Iuser>(INITIAL_STATE);
-    // const [loading, setLoading] = useState(false);
     const login = async (email: string, password: string) => {
         const req = await fetch("/api/auth/login", {
             method: "POST",
@@ -37,12 +36,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             credentials: "include",
         });
         if (req.status === 200) {
-            const data = await req.json(); // ✅ Parse JSON
-            const { token, user } = data.data;  // Assuming this decodes the token
+            const data = await req.json();
+            const { token, user } = data.data;  
             setUserState({ token, user });
             localStorage.setItem("auth-token", token);
             localStorage.setItem("auth-user", JSON.stringify(user));
-            window.location.href = "/add-news";
             return data;
         } else {
             const error = await req.text(); // Still handle text error messages

@@ -5,8 +5,9 @@ import React, { useContext } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Login.module.css'
 import { AuthContext } from '../../context/auth.context';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 function Login() {
+    const searchParams = useSearchParams();
     const router = useRouter();
     const auth = useContext(AuthContext);
     if (!auth) return null;
@@ -16,7 +17,8 @@ function Login() {
         const email = (e.currentTarget["email"] as HTMLInputElement).value;
         const password = (e.currentTarget["password"] as HTMLInputElement).value;
         login(email, password)
-        router.push("/add-news");
+        const redirectPath = searchParams.get("redirect") || "/";
+        router.push(redirectPath);
     }
 
     return (

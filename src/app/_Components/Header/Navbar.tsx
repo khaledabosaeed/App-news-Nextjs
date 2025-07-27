@@ -1,15 +1,22 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Headr.module.css'
 import { usePathname } from 'next/navigation'
 import { AuthContext } from '../../context/auth.context'
 function Navbar() {
+    const [userU, setUser] = useState<News.Iuser | null>(null);
+    useEffect(() => {
+        const us = localStorage.getItem('auth-user');
+        if (us) {
+            const user = JSON.parse(us);
+            setUser(user);
+        }
+    }, []);
     const path = usePathname();
     const auth = useContext(AuthContext);
     if (!auth) return null;
-    const { logout } = auth
-
+    const { logout } = auth;
     return (
         <nav className={styles["nav-links"]}>
             <Link href="/" className={path === "/" ? styles.slected : undefined}>
@@ -25,7 +32,7 @@ function Navbar() {
                 href="/Admin"
                 className={path.startsWith("/Admin") ? styles.slected : undefined}
             >
-                Admin{" "}
+                Admin
             </Link>
             <Link
                 href="/Catagories"
@@ -35,7 +42,7 @@ function Navbar() {
             >
                 Catagories
             </Link>
-            {auth.user?.user ? (
+            {userU ? (
                 <button onClick={logout} className={styles.logout}>
                     Logout
                 </button>
