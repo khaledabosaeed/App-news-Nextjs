@@ -9,7 +9,7 @@ import AboutUs from "../_Components/AboutUS/AboutUs";
 export default function Home() {
   const randomCategories = [...Catagorydata]
     .sort(() => Math.random() - 0.5) // shuffle array
-    .slice(0, 4);
+    .slice(0, 3);
   return (
     <div>
       <Hero />

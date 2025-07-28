@@ -18,7 +18,7 @@ function Catagory(props: Iprops) {
                 className={styles.link}
               >
                 <div className={styles.catagoryItem}>
-                  <h1>{item.title}</h1>
+                  <h1 className={styles.catagoryTitle}>{item.title}</h1>
                   <div className={styles.imgContiner}>
                     <Image
                       className={styles.img}
@@ -28,7 +28,7 @@ function Catagory(props: Iprops) {
                       fill
                     />
                   </div>
-                  <p>{item.Desc}</p>
+                  <p className={styles.categoryDescription}>{item.Desc}</p>
                 </div>
               </Link>
             );

@@ -1,15 +1,14 @@
 .mainContinar {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  min-height: 100%;
   background-color: #f1f1f1;
   overflow: auto;
+  position: relative;
 }
 .sidebar {
   width: 300px;
-  height: 100%;
-  top: 0;
-  position: fixed;
+  height: 100%; /* Use viewport height instead of 100% */
   display: flex;
   padding: 2.5rem 2rem;
   flex-direction: column;
@@ -25,7 +24,6 @@
   backdrop-filter: blur(20px);
   border-right: 2px solid rgba(79, 195, 247, 0.2);
   overflow-y: auto;
-  z-index: 1000;
   position: relative;
 }
 .sidebar::before {
@@ -238,7 +236,7 @@
   background-clip: text;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
-.title::before {
+/* .title::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -254,7 +252,7 @@
   border-radius: 24px;
   z-index: -1;
   border: 1px solid rgba(79, 195, 247, 0.1);
-}
+} */
 .title::after {
   content: "";
   position: absolute;
@@ -282,6 +280,7 @@
 }
 .item {
   display: flex;
+  text-decoration: none;
   flex-direction: column;
   background: #ffffff;
   border-radius: 20px;
@@ -390,6 +389,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex-grow: 1;
+  padding: 5px;
 }
 .loader {
   width: 60px;
