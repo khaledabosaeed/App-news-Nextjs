@@ -1,0 +1,49 @@
+.aboutsection {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  text-align: center;
+}
+
+.aboutcontent {
+  max-width: 850px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.aboutcontent h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aboutcontent h2::before {
+  content: "📢";
+  font-size: 1.8rem;
+  transform: scale(1.1);
+}
+
+.aboutcontent p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
