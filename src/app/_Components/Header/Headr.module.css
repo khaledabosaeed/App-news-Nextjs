@@ -276,11 +276,6 @@
   }
 }
 
-/* Smooth scrolling for sticky header */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Focus styles for accessibility */
 .navLinks a:focus,
 .logout:focus,

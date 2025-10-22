@@ -10,13 +10,16 @@ const POST = async (req: NextRequest) => {
         await req.json() as { email: string, name: string, password: string, role: string };
         const exist = exists(email);
         if (exist) {
-            return new NextResponse("Email already exists"), {
-                status: 400,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        };
+            return NextResponse.json(
+                { error: "Email already exists" },
+                {
+                    status: 400,
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }
+            );
+        }
         const hashedPassword = await hashPassword(password);
         const user: News.Iuser = { email, name, password: hashedPassword, role };
         addUser(user);
